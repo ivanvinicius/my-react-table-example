@@ -1,0 +1,28 @@
+{
+  "states": [
+    {
+      "id": 1,
+      "name": "Santa Catarina",
+      "country": "Brazil",
+      "region": "South"
+    },
+    {
+      "id": 2,
+      "name": "Amazonas",
+      "country": "Brazil",
+      "region": "North"
+    },
+    {
+      "id": 3,
+      "name": "Bahia",
+      "country": "Brazil",
+      "region": "Lest"
+    },
+    {
+      "id": 4,
+      "name": "Mato Grosso",
+      "country": "Brazil",
+      "region": "West"
+    }
+  ]
+}
