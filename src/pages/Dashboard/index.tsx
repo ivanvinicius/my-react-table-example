@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTable, Column } from 'react-table';
 
 import api from '../../services/api';
+import formatDataToColumns from '../../utils/formatDataToColumns';
 import { Table } from './styles';
 
 interface IStateProps {
@@ -13,6 +14,24 @@ interface IStateProps {
 
 const Dashboard: React.FC = () => {
   const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
+
+  const columns = useMemo<Column<IStateProps>[]>(() => {
+    const items: any = []; //eslint-disable-line
+
+    Object.keys(states[0]).map((key) => {
+      return items.push(formatDataToColumns(key));
+    });
+
+    return items;
+  }, [states]);
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable<IStateProps>({ columns, data: states });
 
   useEffect(() => {
     api.get('/states').then((response) => {
@@ -28,36 +47,6 @@ const Dashboard: React.FC = () => {
       setStates(formattedStatesToTable);
     });
   }, []);
-
-  const columns = React.useMemo<Column<IStateProps>[]>(
-    () => [
-      {
-        Header: 'Id',
-        accessor: 'id',
-      },
-      {
-        Header: 'Name',
-        accessor: 'name',
-      },
-      {
-        Header: 'Country',
-        accessor: 'country',
-      },
-      {
-        Header: 'Region',
-        accessor: 'region',
-      },
-    ],
-    [],
-  );
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable<IStateProps>({ columns, data: states });
 
   return (
     <Table {...getTableProps()}>
