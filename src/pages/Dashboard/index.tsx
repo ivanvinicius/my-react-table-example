@@ -1,30 +1,51 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTable, Column } from 'react-table';
 
-interface IDataProps {
-  [key: string]: string | number;
+import api from '../../services/api';
+import { Table } from './styles';
+
+interface IStateProps {
+  id: number;
+  name: string;
+  country: string;
+  region: string;
 }
 
 const Dashboard: React.FC = () => {
-  const data: IDataProps[] = React.useMemo(
-    () => [
-      {
-        col1: 'Hello',
-        col2: 'World',
-      },
-    ],
-    [],
-  );
+  const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
 
-  const columns = React.useMemo<Column<IDataProps>[]>(
+  useEffect(() => {
+    api.get('/states').then((response) => {
+      const formattedStatesToTable: IStateProps[] = response.data.map(
+        ({ id, name, country, region }: IStateProps) => ({
+          id,
+          name,
+          country,
+          region,
+        }),
+      );
+
+      setStates(formattedStatesToTable);
+    });
+  }, []);
+
+  const columns = React.useMemo<Column<IStateProps>[]>(
     () => [
       {
-        Header: 'Column 1',
-        accessor: 'col1',
+        Header: 'Id',
+        accessor: 'id',
       },
       {
-        Header: 'Column 2',
-        accessor: 'col2',
+        Header: 'Name',
+        accessor: 'name',
+      },
+      {
+        Header: 'Country',
+        accessor: 'country',
+      },
+      {
+        Header: 'Region',
+        accessor: 'region',
       },
     ],
     [],
@@ -36,10 +57,10 @@ const Dashboard: React.FC = () => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable<IDataProps>({ columns, data });
+  } = useTable<IStateProps>({ columns, data: states });
 
   return (
-    <table {...getTableProps()}>
+    <Table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -61,7 +82,7 @@ const Dashboard: React.FC = () => {
           );
         })}
       </tbody>
-    </table>
+    </Table>
   );
 };
 
