@@ -1,30 +1,30 @@
 import styled from 'styled-components';
 
-export const Table = styled.table`
-  display: table;
-  width: 100%;
-  max-width: 800px;
-  margin: 50px auto;
-  border-radius: 10px;
-  box-shadow: 6px 6px 9px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-color: var(--color-white);
-  transition: all 0.3s;
+export const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
 
-  th,
-  td {
-    border-bottom: 1px solid var(--color-line-in-white);
-    text-align: left;
-    padding: 16px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &,
-  th,
-  td {
-    border-collapse: collapse;
-  }
+  ul {
+    li {
+      list-style: none;
 
-  tbody tr:hover {
-    color: var(--color-purple);
+      & + li {
+        margin-top: 30px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--color-purple);
+        transition: color 0.4s ease;
+
+        &:hover {
+          color: var(--color-orange);
+        }
+      }
+    }
   }
 `;
