@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useTable, Column } from 'react-table';
+import { useTable } from 'react-table';
 
-import api from '../../services/api';
-import formatDataToColumns from '../../utils/formatDataToColumns';
+import api from '../../../services/api';
+import formatDataToColumns from '../../../utils/formatDataToColumns';
 
 import { Table } from './styles';
 
-interface IStateProps {
-  id: number;
-  name: string;
-  country: string;
-  region: string;
-}
+export default function FilterTable() {
+  const [states, setStates] = useState([
+    {
+      id: 0,
+      name: '',
+      country: '',
+      region: '',
+    },
+  ]);
 
-const SimpleTable: React.FC = () => {
-  const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
-
-  const columns = useMemo<Column<IStateProps>[]>(() => {
-    const items: any = []; //eslint-disable-line
+  const columns = useMemo(() => {
+    const items = [];
 
     Object.keys(states[0]).map((key) => {
       return items.push(formatDataToColumns(key));
@@ -32,17 +32,12 @@ const SimpleTable: React.FC = () => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable<IStateProps>({ columns, data: states });
+  } = useTable({ columns, data: states });
 
   useEffect(() => {
     api.get('/states').then((response) => {
-      const formattedStatesToTable: IStateProps[] = response.data.map(
-        ({ id, name, country, region }: IStateProps) => ({
-          id,
-          name,
-          country,
-          region,
-        }),
+      const formattedStatesToTable = response.data.map(
+        ({ id, name, country, region }) => ({ id, name, country, region }),
       );
 
       setStates(formattedStatesToTable);
@@ -60,9 +55,11 @@ const SimpleTable: React.FC = () => {
           </tr>
         ))}
       </thead>
+
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row);
+
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
@@ -74,6 +71,4 @@ const SimpleTable: React.FC = () => {
       </tbody>
     </Table>
   );
-};
-
-export default SimpleTable;
+}

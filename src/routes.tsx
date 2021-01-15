@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard';
 import SimpleTable from './pages/SimpleTable';
-import PaginationTable from './pages/PaginationTable';
+
+import FilterTable from './pages/JSX/FilterTable';
 
 const Routes: React.FC = () => {
   return (
@@ -12,7 +13,8 @@ const Routes: React.FC = () => {
         <Route path="/" exact component={Dashboard} />
 
         <Route path="/simple" component={SimpleTable} />
-        <Route path="/pagination" component={PaginationTable} />
+
+        <Route path="/filter" component={FilterTable} />
       </Switch>
     </BrowserRouter>
   );
