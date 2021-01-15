@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useTable } from 'react-table';
+import { useTable, useGlobalFilter } from 'react-table';
 
 import api from '../../../services/api';
 import formatDataToColumns from '../../../utils/formatDataToColumns';
+
+import GlobalInputFilter from './GlobalInputFilter';
 
 import { Table } from './styles';
 
@@ -31,8 +33,10 @@ export default function FilterTable() {
     getTableBodyProps,
     headerGroups,
     rows,
+    state,
     prepareRow,
-  } = useTable({ columns, data: states });
+    setGlobalFilter,
+  } = useTable({ columns, data: states }, useGlobalFilter);
 
   useEffect(() => {
     api.get('/states').then((response) => {
@@ -47,6 +51,15 @@ export default function FilterTable() {
   return (
     <Table {...getTableProps()}>
       <thead>
+        <tr>
+          <th colSpan="4">
+            <GlobalInputFilter
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
+          </th>
+        </tr>
+
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
