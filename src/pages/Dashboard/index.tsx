@@ -16,6 +16,11 @@ const Dashboard: React.FC = () => {
         <li>
           <Link to="pagination">Table with Pagination - JSX</Link>
         </li>
+        <li>
+          <Link to="pag-row-selection">
+            Table with Row Selection and Pagination - JSX
+          </Link>
+        </li>
       </ul>
     </Container>
   );

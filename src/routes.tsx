@@ -6,6 +6,7 @@ import SimpleTable from './pages/SimpleTable';
 
 import FilterTable from './pages/JSX/FilterTable';
 import PaginationTable from './pages/JSX/PaginationTable';
+import PaginationRowSelectionTable from './pages/JSX/PaginationRowSelectionTable';
 
 const Routes: React.FC = () => {
   return (
@@ -17,6 +18,10 @@ const Routes: React.FC = () => {
 
         <Route path="/filter" component={FilterTable} />
         <Route path="/pagination" component={PaginationTable} />
+        <Route
+          path="/pag-row-selection"
+          component={PaginationRowSelectionTable}
+        />
       </Switch>
     </BrowserRouter>
   );
