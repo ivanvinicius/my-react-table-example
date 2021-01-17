@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import SimpleTable from './pages/SimpleTable';
 
 import FilterTable from './pages/JSX/FilterTable';
+import PaginationTable from './pages/JSX/PaginationTable';
 
 const Routes: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Routes: React.FC = () => {
         <Route path="/simple" component={SimpleTable} />
 
         <Route path="/filter" component={FilterTable} />
+        <Route path="/pagination" component={PaginationTable} />
       </Switch>
     </BrowserRouter>
   );

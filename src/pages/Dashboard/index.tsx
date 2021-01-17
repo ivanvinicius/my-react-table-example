@@ -13,6 +13,9 @@ const Dashboard: React.FC = () => {
         <li>
           <Link to="filter">Table with Filter - JSX</Link>
         </li>
+        <li>
+          <Link to="pagination">Table with Pagination - JSX</Link>
+        </li>
       </ul>
     </Container>
   );
