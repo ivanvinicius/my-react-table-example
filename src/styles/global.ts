@@ -4,6 +4,7 @@ export default createGlobalStyle`
   :root {
     --color-white: #FFFF;
     --color-black: #000;
+
     font-size: 60%;
   }
 
@@ -14,8 +15,16 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
+  body #root {
+    width: 100vw;
+    height: 100vh;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #236eac;
+    background-image: linear-gradient(33deg, #236eac, #4b8691, #5a9f74, #5db951)
   }
 
   body, input, button, textarea {

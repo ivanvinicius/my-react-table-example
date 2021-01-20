@@ -8,6 +8,14 @@ import GlobalInputFilter from '../../components/ReactTable/GlobalInputFilter';
 import IStateProps from '../../dtos/IStateProps';
 import IColumnProps from '../../dtos/IColumnProps';
 
+import {
+  Container,
+  TableContainer,
+  ControlsArea,
+  ButtonsArea,
+  Infos,
+} from './styles';
+
 const Table: React.FC = () => {
   const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
 
@@ -48,8 +56,7 @@ const Table: React.FC = () => {
     nextPage,
     previousPage,
     setGlobalFilter,
-    state: { pageIndex },
-    state,
+    state: { pageIndex, globalFilter },
   } = useTable(
     {
       columns,
@@ -61,18 +68,9 @@ const Table: React.FC = () => {
   );
 
   return (
-    <>
-      <table {...getTableProps()}>
+    <Container>
+      <TableContainer {...getTableProps()}>
         <thead>
-          <tr>
-            <th colSpan={4}>
-              <GlobalInputFilter
-                globalFilter={state.globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-            </th>
-          </tr>
-
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -81,6 +79,7 @@ const Table: React.FC = () => {
             </tr>
           ))}
         </thead>
+
         <tbody {...getTableBodyProps()}>
           {page.map((row) => {
             prepareRow(row);
@@ -95,47 +94,56 @@ const Table: React.FC = () => {
             );
           })}
         </tbody>
-      </table>
+      </TableContainer>
 
-      <div>
-        <button
-          type="button"
-          onClick={() => gotoPage(0)}
-          disabled={!canPreviousPage}
-        >
-          {'<<'}
-        </button>
+      <ControlsArea>
+        <GlobalInputFilter
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
 
-        <button
-          type="button"
-          onClick={() => previousPage()}
-          disabled={!canPreviousPage}
-        >
-          {'<'}
-        </button>
+        <ButtonsArea>
+          <button
+            type="button"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            {'<<'}
+          </button>
 
-        <button
-          type="button"
-          onClick={() => nextPage()}
-          disabled={!canNextPage}
-        >
-          {'>'}
-        </button>
+          <button
+            type="button"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
+            {'<'}
+          </button>
 
-        <button
-          type="button"
-          onClick={() => gotoPage(pageCount - 1)}
-          disabled={!canNextPage}
-        >
-          {'>>'}
-        </button>
+          <button
+            type="button"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
+            {'>'}
+          </button>
 
+          <button
+            type="button"
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {'>>'}
+          </button>
+        </ButtonsArea>
+      </ControlsArea>
+
+      <Infos>
         <span>
           {`Page `}
           <strong>{`${pageIndex + 1} of ${pageOptions.length}`}</strong>
         </span>
-      </div>
-    </>
+      </Infos>
+    </Container>
   );
 };
 
