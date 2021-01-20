@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useAsyncDebounce } from 'react-table';
 
-import { Input } from './styles';
-
 interface IGlobalFilterProps {
   globalFilter: string | undefined;
   setGlobalFilter: (filterValue: string | number | undefined) => void;
@@ -18,7 +16,7 @@ const GlobalInputFilter: React.FC<IGlobalFilterProps> = ({
   }, 200);
 
   return (
-    <Input
+    <input
       value={value || ''}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);

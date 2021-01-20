@@ -4,240 +4,120 @@
       "id": 1,
       "name": "Santa Catarina",
       "country": "Brazil",
-      "region": "South"
+      "region": "Any"
     },
     {
       "id": 2,
       "name": "Amazonas",
       "country": "Brazil",
-      "region": "North"
+      "region": "Any"
     },
     {
       "id": 3,
       "name": "Bahia",
       "country": "Brazil",
-      "region": "Lest"
+      "region": "Any"
     },
     {
       "id": 4,
       "name": "Mato Grosso",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 5,
       "name": "Rio de Janeiro",
       "country": "Brazil",
-      "region": "Lest"
+      "region": "Any"
     },{
       "id": 6,
       "name": "Mato Grosso",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 7,
-      "name": "Mato Grosso",
+      "name": "Rio Grande Do Sul",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 8,
-      "name": "Mato Grosso",
+      "name": "Paraná",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 9,
-      "name": "Mato Grosso",
+      "name": "São Paulo",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 10,
-      "name": "Mato Grosso",
+      "name": "Rio De Janeiro",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id":11,
-      "name": "Mato Grosso",
+      "name": "Bahia",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 12,
-      "name": "Mato Grosso",
+      "name": "Sergipe",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any Lest"
     },
     {
       "id": 13,
-      "name": "Mato Grosso",
+      "name": "Alagoas",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 14,
-      "name": "Mato Grosso",
+      "name": "Pernambuco",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 15,
-      "name": "Mato Grosso",
+      "name": "Paraíba",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 16,
-      "name": "Mato Grosso",
+      "name": "Rio Grande do Norte",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 17,
-      "name": "Mato Grosso",
+      "name": "Ceará",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 18,
-      "name": "Mato Grosso",
+      "name": "Piauí",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 19,
-      "name": "Mato Grosso",
+      "name": "Maranhão",
       "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     },
     {
       "id": 20,
-      "name": "Mato Grosso",
+      "name": "Pará",
       "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 21,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 22,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 23,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 24,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 25,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 26,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 27,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 28,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 29,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 30,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 31,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 32,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 33,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 34,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 35,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 36,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 37,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 38,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 39,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
-    },
-    {
-      "id": 40,
-      "name": "Mato Grosso",
-      "country": "Brazil",
-      "region": "West"
+      "region": "Any"
     }
   ]
 }

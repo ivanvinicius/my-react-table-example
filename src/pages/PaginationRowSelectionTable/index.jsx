@@ -1,8 +1,8 @@
 import React, { useMemo, useEffect, forwardRef, useState } from 'react';
 import { useTable, usePagination, useRowSelect } from 'react-table';
 
-import api from '../../../services/api';
-import formatDataToColumns from '../../../utils/formatDataToColumns';
+import api from '../../services/api';
+import formatDataToColumns from '../../utils/getKeysFromDataObject';
 
 import { Container, Table, PaginationButtons } from './styles';
 
