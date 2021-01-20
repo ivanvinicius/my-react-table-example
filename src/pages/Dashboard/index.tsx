@@ -8,18 +8,16 @@ const Dashboard: React.FC = () => {
     <Container>
       <ul>
         <li>
-          <Link to="simple">Simple Table - TSX</Link>
+          <Link to="simple">Simple</Link>
         </li>
         <li>
-          <Link to="filter">Table with Filter - JSX</Link>
+          <Link to="pagination">Pagination</Link>
         </li>
         <li>
-          <Link to="pagination">Table with Pagination - JSX</Link>
+          <Link to="filter">Filter - JSX</Link>
         </li>
         <li>
-          <Link to="pag-row-selection">
-            Table with Row Selection and Pagination - JSX
-          </Link>
+          <Link to="pag-row-selection">Row Selection - JSX</Link>
         </li>
       </ul>
     </Container>

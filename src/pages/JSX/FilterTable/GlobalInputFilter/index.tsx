@@ -3,7 +3,10 @@ import { useAsyncDebounce } from 'react-table';
 
 import { Input } from './styles';
 
-export default function GlobalInputFilter({ globalFilter, setGlobalFilter }) {
+const GlobalInputFilter: React.FC<any> = ({
+  globalFilter,
+  setGlobalFilter,
+}) => {
   const [value, setValue] = useState(globalFilter);
   const onChange = useAsyncDebounce((eventValue) => {
     setGlobalFilter(eventValue || undefined);
@@ -12,11 +15,13 @@ export default function GlobalInputFilter({ globalFilter, setGlobalFilter }) {
   return (
     <Input
       value={value || ''}
-      onChange={(e) => {
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
         onChange(e.target.value);
       }}
       placeholder="Pesquisar..."
     />
   );
-}
+};
+
+export default GlobalInputFilter;

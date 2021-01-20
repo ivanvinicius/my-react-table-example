@@ -37,7 +37,6 @@ export const Table = styled.table`
 `;
 
 export const PaginationButtons = styled.div`
-
   button {
     margin: 5px;
     padding: 0 5px;

@@ -1,23 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTable, usePagination } from 'react-table';
+import { useTable, usePagination, Column, Row, Cell } from 'react-table';
 
-import api from '../../../services/api';
-import formatDataToColumns from '../../../utils/formatDataToColumns';
+import api from '../../services/api';
+import formatDataToColumns from '../../utils/formatDataToColumns';
 
 import { Container, Table, PaginationButtons } from './styles';
 
-export default function PaginationTable() {
-  const [states, setStates] = useState([
-    {
-      id: 0,
-      name: '',
-      country: '',
-      region: '',
-    },
-  ]);
+interface IStateProps {
+  id: string;
+  name: string;
+  country: string;
+  region: string;
+}
 
-  const columns = useMemo(() => {
-    const items = [];
+const PaginationTable: React.FC = () => {
+  const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
+
+  const columns = useMemo<Column<IStateProps>[]>(() => {
+    const items: any = []; //eslint-disable-line
 
     Object.keys(states[0]).map((key) => {
       return items.push(formatDataToColumns(key));
@@ -51,8 +51,13 @@ export default function PaginationTable() {
 
   useEffect(() => {
     api.get('/states').then((response) => {
-      const formattedStatesToTable = response.data.map(
-        ({ id, name, country, region }) => ({ id, name, country, region }),
+      const formattedStatesToTable: IStateProps[] = response.data.map(
+        ({ id, name, country, region }: IStateProps) => ({
+          id,
+          name,
+          country,
+          region,
+        }),
       );
 
       setStates(formattedStatesToTable);
@@ -72,11 +77,11 @@ export default function PaginationTable() {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+          {page.map((row: Row<IStateProps>) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
+                {row.cells.map((cell: Cell<IStateProps>) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   );
@@ -127,4 +132,6 @@ export default function PaginationTable() {
       </PaginationButtons>
     </Container>
   );
-}
+};
+
+export default PaginationTable;
