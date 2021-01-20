@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import SimpleTable from './pages/SimpleTable';
 import PaginationTable from './pages/PaginationTable';
+import FilterTable from './pages/FilterTable';
 
-import FilterTable from './pages/JSX/FilterTable';
 import PaginationRowSelectionTable from './pages/JSX/PaginationRowSelectionTable';
 
 const Routes: React.FC = () => {

@@ -1,25 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useTable, useGlobalFilter } from 'react-table';
+import { useTable, useGlobalFilter, Column } from 'react-table';
 
-import api from '../../../services/api';
-import formatDataToColumns from '../../../utils/formatDataToColumns';
+import api from '../../services/api';
+import formatDataToColumns from '../../utils/formatDataToColumns';
+import IStateProps from '../../dtos/IStateProps';
 
 import GlobalInputFilter from './GlobalInputFilter';
 
 import { Table } from './styles';
 
 export default function FilterTable() {
-  const [states, setStates] = useState([
-    {
-      id: 0,
-      name: '',
-      country: '',
-      region: '',
-    },
-  ]);
+  const [states, setStates] = useState([{} as IStateProps]);
 
-  const columns = useMemo(() => {
-    const items = [];
+  const columns = useMemo<Column<IStateProps>[]>(() => {
+    const items: any = []; //eslint-disable-line
 
     Object.keys(states[0]).map((key) => {
       return items.push(formatDataToColumns(key));
@@ -36,12 +30,17 @@ export default function FilterTable() {
     state,
     prepareRow,
     setGlobalFilter,
-  } = useTable({ columns, data: states }, useGlobalFilter);
+  } = useTable<IStateProps>({ columns, data: states }, useGlobalFilter);
 
   useEffect(() => {
     api.get('/states').then((response) => {
-      const formattedStatesToTable = response.data.map(
-        ({ id, name, country, region }) => ({ id, name, country, region }),
+      const formattedStatesToTable: IStateProps[] = response.data.map(
+        ({ id, name, country, region }: IStateProps) => ({
+          id,
+          name,
+          country,
+          region,
+        }),
       );
 
       setStates(formattedStatesToTable);
@@ -52,7 +51,7 @@ export default function FilterTable() {
     <Table {...getTableProps()}>
       <thead>
         <tr>
-          <th colSpan="4">
+          <th colSpan={4}>
             <GlobalInputFilter
               globalFilter={state.globalFilter}
               setGlobalFilter={setGlobalFilter}

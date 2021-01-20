@@ -1,17 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTable, usePagination, Column, Row, Cell } from 'react-table';
+import { useTable, usePagination, Column } from 'react-table';
 
 import api from '../../services/api';
 import formatDataToColumns from '../../utils/formatDataToColumns';
+import IStateProps from '../../dtos/IStateProps';
 
 import { Container, Table, PaginationButtons } from './styles';
-
-interface IStateProps {
-  id: string;
-  name: string;
-  country: string;
-  region: string;
-}
 
 const PaginationTable: React.FC = () => {
   const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
@@ -40,7 +34,7 @@ const PaginationTable: React.FC = () => {
     nextPage,
     previousPage,
     state: { pageIndex },
-  } = useTable(
+  } = useTable<IStateProps>(
     {
       columns,
       data: states,
@@ -77,11 +71,11 @@ const PaginationTable: React.FC = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row: Row<IStateProps>) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell: Cell<IStateProps>) => {
+                {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   );

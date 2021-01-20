@@ -3,15 +3,9 @@ import { useTable, Column } from 'react-table';
 
 import api from '../../services/api';
 import formatDataToColumns from '../../utils/formatDataToColumns';
+import IStateProps from '../../dtos/IStateProps';
 
 import { Table } from './styles';
-
-interface IStateProps {
-  id: number;
-  name: string;
-  country: string;
-  region: string;
-}
 
 const SimpleTable: React.FC = () => {
   const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);

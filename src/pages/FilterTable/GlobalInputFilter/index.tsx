@@ -3,7 +3,12 @@ import { useAsyncDebounce } from 'react-table';
 
 import { Input } from './styles';
 
-const GlobalInputFilter: React.FC<any> = ({
+interface IGlobalFilterProps {
+  globalFilter: string | undefined;
+  setGlobalFilter: (filterValue: string | number | undefined) => void;
+}
+
+const GlobalInputFilter: React.FC<IGlobalFilterProps> = ({
   globalFilter,
   setGlobalFilter,
 }) => {
