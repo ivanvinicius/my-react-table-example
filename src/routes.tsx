@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Table from './pages/Table';
-import PaginationRowSelectionTable from './pages/PaginationRowSelectionTable';
+import List from './pages/ListItems';
+// import PaginationRowSelectionTable from './pages/PaginationRowSelectionTable';
 
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Table} />
+        <Route path="/" exact component={List} />
 
-        <Route path="/row" component={PaginationRowSelectionTable} />
+        {/* <Route path="/row" component={PaginationRowSelectionTable} /> */}
       </Switch>
     </BrowserRouter>
   );

@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Column, useGlobalFilter, usePagination, useTable } from 'react-table';
 
-import api from '../../services/api';
 import getKeysFromDataObject from '../../utils/getKeysFromDataObject';
-import GlobalInputFilter from '../../components/ReactTable/GlobalInputFilter';
+import GlobalInputFilter from './GlobalInputFilter';
 
-import IStateProps from '../../dtos/IStateProps';
 import IColumnProps from '../../dtos/IColumnProps';
 
 import {
@@ -17,33 +15,18 @@ import {
   Infos,
 } from './styles';
 
-const Table: React.FC = () => {
-  const [states, setStates] = useState<IStateProps[]>([{} as IStateProps]);
+interface ITableProps {
+  data: Array<{}>;
+}
 
+const Table: React.FC<ITableProps> = ({ data }) => {
   const columns = useMemo<Column[]>(() => {
     const items: IColumnProps[] = [];
 
-    Object.keys(states[0]).map((key) => items.push(getKeysFromDataObject(key)));
+    Object.keys(data[0]).map((key) => items.push(getKeysFromDataObject(key)));
 
     return items;
-  }, [states]);
-
-  const countTableItems = useMemo(() => states.length, [states]);
-
-  useEffect(() => {
-    api.get('/states').then((response) => {
-      const formattedData = response.data.map(
-        ({ id, name, country, region }: IStateProps) => ({
-          id,
-          name,
-          country,
-          region,
-        }),
-      );
-
-      setStates(formattedData);
-    });
-  }, []);
+  }, [data]);
 
   const {
     getTableProps,
@@ -63,7 +46,7 @@ const Table: React.FC = () => {
   } = useTable(
     {
       columns,
-      data: states,
+      data,
       initialState: {
         pageIndex: 0,
         hiddenColumns: ['id'],
@@ -72,6 +55,8 @@ const Table: React.FC = () => {
     useGlobalFilter,
     usePagination,
   );
+
+  const countTableItems = useMemo(() => data.length, [data]);
 
   const countItemsSelected = useMemo(() => {
     return selectedRowIds ? selectedRowIds.length : 0;
