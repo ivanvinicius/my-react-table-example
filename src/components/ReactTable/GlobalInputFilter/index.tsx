@@ -22,7 +22,7 @@ const GlobalInputFilter: React.FC<IGlobalFilterProps> = ({
         setValue(e.target.value);
         onChange(e.target.value);
       }}
-      placeholder="Pesquisar..."
+      placeholder="Search..."
     />
   );
 };

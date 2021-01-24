@@ -10,9 +10,10 @@ import IColumnProps from '../../dtos/IColumnProps';
 
 import {
   Container,
-  TableContainer,
   ControlsArea,
   ButtonsArea,
+  TableContainer,
+  ActionsArea,
   Infos,
 } from './styles';
 
@@ -26,6 +27,8 @@ const Table: React.FC = () => {
 
     return items;
   }, [states]);
+
+  const countTableItems = useMemo(() => states.length, [states]);
 
   useEffect(() => {
     api.get('/states').then((response) => {
@@ -56,46 +59,26 @@ const Table: React.FC = () => {
     nextPage,
     previousPage,
     setGlobalFilter,
-    state: { pageIndex, globalFilter },
+    state: { pageIndex, globalFilter, selectedRowIds },
   } = useTable(
     {
       columns,
       data: states,
-      initialState: { pageIndex: 0 },
+      initialState: {
+        pageIndex: 0,
+        hiddenColumns: ['id'],
+      },
     },
     useGlobalFilter,
     usePagination,
   );
 
+  const countItemsSelected = useMemo(() => {
+    return selectedRowIds ? selectedRowIds.length : 0;
+  }, [selectedRowIds]);
+
   return (
     <Container>
-      <TableContainer {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </TableContainer>
-
       <ControlsArea>
         <GlobalInputFilter
           globalFilter={globalFilter}
@@ -137,12 +120,42 @@ const Table: React.FC = () => {
         </ButtonsArea>
       </ControlsArea>
 
-      <Infos>
-        <span>
-          {`Page `}
-          <strong>{`${pageIndex + 1} of ${pageOptions.length}`}</strong>
-        </span>
-      </Infos>
+      <TableContainer {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+
+        <tbody {...getTableBodyProps()}>
+          {page.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </TableContainer>
+
+      <ActionsArea>
+        <div />
+
+        <Infos>
+          <span>{`Page ${pageIndex + 1} of ${pageOptions.length}`}</span>
+          <span>{`${countTableItems} items`}</span>
+          <span>{`${countItemsSelected} items selected`}</span>
+        </Infos>
+      </ActionsArea>
     </Container>
   );
 };
