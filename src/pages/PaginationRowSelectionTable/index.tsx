@@ -1,13 +1,14 @@
-import React, { useMemo, useEffect, forwardRef, useState } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useTable, usePagination, useRowSelect } from 'react-table';
 
 import api from '../../services/api';
+import InputCheckbox from './InputCheckbox';
 import formatDataToColumns from '../../utils/getKeysFromDataObject';
 
 import { Container, Table, PaginationButtons } from './styles';
 
 export default function PaginationRowSelectionTable() {
-  const [states, setStates] = useState([
+  const [states, setStates] = useState<any>([
     {
       id: 0,
       name: '',
@@ -16,23 +17,8 @@ export default function PaginationRowSelectionTable() {
     },
   ]);
 
-  const InputCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef();
-    const resolvedRef = ref || defaultRef;
-
-    useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate;
-    }, [resolvedRef, indeterminate]);
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    );
-  });
-
   const columns = useMemo(() => {
-    const items = [];
+    const items: any = [];
 
     Object.keys(states[0]).map((key) => {
       return items.push(formatDataToColumns(key));
@@ -85,7 +71,7 @@ export default function PaginationRowSelectionTable() {
   useEffect(() => {
     api.get('/states').then((response) => {
       const formattedStatesToTable = response.data.map(
-        ({ id, name, country, region }) => ({ id, name, country, region }),
+        ({ id, name, country, region }: any) => ({ id, name, country, region }),
       );
 
       setStates(formattedStatesToTable);
