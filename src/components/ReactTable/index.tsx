@@ -1,8 +1,16 @@
 import React, { useMemo } from 'react';
-import { Column, useGlobalFilter, usePagination, useTable } from 'react-table';
+import {
+  Column,
+  useGlobalFilter,
+  usePagination,
+  useRowSelect,
+  useTable,
+} from 'react-table';
 
 import getKeysFromDataObject from '../../utils/getKeysFromDataObject';
+
 import GlobalInputFilter from './GlobalInputFilter';
+import IndeterminateInput from './IndeterminateInput';
 
 import IColumnProps from '../../dtos/IColumnProps';
 
@@ -42,7 +50,7 @@ const Table: React.FC<ITableProps> = ({ data }) => {
     nextPage,
     previousPage,
     setGlobalFilter,
-    state: { pageIndex, globalFilter, selectedRowIds },
+    state: { pageIndex, globalFilter },
   } = useTable(
     {
       columns,
@@ -54,13 +62,34 @@ const Table: React.FC<ITableProps> = ({ data }) => {
     },
     useGlobalFilter,
     usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((allColumns) => [
+        {
+          id: 'selection',
+          Header: ({ getToggleAllPageRowsSelectedProps }) => (
+            <div>
+              <IndeterminateInput
+                name=""
+                {...getToggleAllPageRowsSelectedProps()}
+              />
+            </div>
+          ),
+          Cell: ({ row }) => (
+            <div>
+              <IndeterminateInput
+                name=""
+                {...row.getToggleRowSelectedProps()}
+              />
+            </div>
+          ),
+        },
+        ...allColumns,
+      ]);
+    },
   );
 
   const countTableItems = useMemo(() => data.length, [data]);
-
-  const countItemsSelected = useMemo(() => {
-    return selectedRowIds ? selectedRowIds.length : 0;
-  }, [selectedRowIds]);
 
   return (
     <Container>
@@ -138,7 +167,6 @@ const Table: React.FC<ITableProps> = ({ data }) => {
         <Infos>
           <span>{`Page ${pageIndex + 1} of ${pageOptions.length}`}</span>
           <span>{`${countTableItems} items`}</span>
-          <span>{`${countItemsSelected} items selected`}</span>
         </Infos>
       </ActionsArea>
     </Container>

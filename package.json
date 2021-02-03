@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "json:server": "json-server --delay 2000 --watch database.json --port 3333"
+    "json:server": "json-server --watch database.json --port 3333"
   },
   "browserslist": {
     "production": [
